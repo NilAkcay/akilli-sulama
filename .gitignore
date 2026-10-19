@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# API anahtarlari ve gizli bilgiler
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Veritabani
+sulama_gecmisi.db
+
+# VS Code ayarlari
+.vscode/
+
+# Sistem dosyalari
+.DS_Store
+Thumbs.db
