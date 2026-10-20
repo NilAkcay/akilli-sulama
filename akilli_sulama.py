@@ -8,6 +8,7 @@ import sqlite3
 from datetime import datetime
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from model import train_model
 
 # --- 1. AYARLAR ---
 st.set_page_config(page_title="Akıllı Sulama Karar Destek", page_icon="🌱", layout="wide", initial_sidebar_state="expanded")
@@ -64,28 +65,12 @@ st.title("🌱 Akıllı Bitki Sulama Karar Destek Sistemi")
 st.write("Yapay zeka desteği ile tarımsal verimliliği artırıyor, maliyetlerinizi optimize ediyoruz.")
 
 if df is not None:
-    X = df[['sicaklik', 'nem', 'isik', 'bitki_turu_kod']]
-    y = df['su_miktari']
-    # Veriyi %80 egitim, %20 test olarak ayir
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42
-    )
+    model, metrics = train_model()
 
-    # Random Forest modelini egit
-    model = RandomForestRegressor(
-        n_estimators=100,
-        random_state=42
-    )
+    mae = metrics["mae"]
+    rmse = metrics["rmse"]
+    r2 = metrics["r2"]
 
-    model.fit(X_train, y_train)
-
-    # Test verileri uzerinde tahmin yap
-    y_pred = model.predict(X_test)
-
-    # Model performansini hesapla
-    mae = mean_absolute_error(y_test, y_pred)
-    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
-    r2 = r2_score(y_test, y_pred)
         # Model degerlendirme sonuclari
     with st.expander("📊 Makine Öğrenmesi Model Performansı"):
         st.write("Random Forest Regression - Test Sonuçları")
