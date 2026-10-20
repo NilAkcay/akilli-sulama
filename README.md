@@ -43,7 +43,7 @@ The model explains approximately 93.9% of the variance in the synthetic test dat
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/akilli-sulama.git
+git clone https://github.com/NilAkcay/akilli-sulama.git
 cd akilli-sulama
 ```
 
