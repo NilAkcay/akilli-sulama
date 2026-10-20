@@ -25,12 +25,25 @@ A machine learning-based irrigation decision support application developed with 
 
 The model is trained on a synthetically generated dataset created with Python. Predictions are intended for demonstration and educational purposes, not validated agricultural recommendations.
 
+
+## Model Performance
+
+The Random Forest Regressor was evaluated using an 80/20 train-test split on a synthetically generated dataset.
+
+| Evaluation Metric | Result |
+|---|---:|
+| Mean Absolute Error (MAE) | 3.40 |
+| Root Mean Squared Error (RMSE) | 4.29 |
+| R² Score | 0.9390 |
+
+The model explains approximately 93.9% of the variance in the synthetic test dataset. These results demonstrate performance on simulated data and do not represent validated real-world agricultural accuracy.
+  
 ## Installation
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/NilAkcay/akilli-sulama.git
+git clone https://github.com/YOUR_USERNAME/akilli-sulama.git
 cd akilli-sulama
 ```
 

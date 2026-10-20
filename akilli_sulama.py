@@ -6,6 +6,8 @@ import numpy as np
 import requests
 import sqlite3
 from datetime import datetime
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # --- 1. AYARLAR ---
 st.set_page_config(page_title="Akıllı Sulama Karar Destek", page_icon="🌱", layout="wide", initial_sidebar_state="expanded")
@@ -64,7 +66,40 @@ st.write("Yapay zeka desteği ile tarımsal verimliliği artırıyor, maliyetler
 if df is not None:
     X = df[['sicaklik', 'nem', 'isik', 'bitki_turu_kod']]
     y = df['su_miktari']
-    model = RandomForestRegressor(n_estimators=100, random_state=42).fit(X, y)
+    # Veriyi %80 egitim, %20 test olarak ayir
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
+
+    # Random Forest modelini egit
+    model = RandomForestRegressor(
+        n_estimators=100,
+        random_state=42
+    )
+
+    model.fit(X_train, y_train)
+
+    # Test verileri uzerinde tahmin yap
+    y_pred = model.predict(X_test)
+
+    # Model performansini hesapla
+    mae = mean_absolute_error(y_test, y_pred)
+    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    r2 = r2_score(y_test, y_pred)
+        # Model degerlendirme sonuclari
+    with st.expander("📊 Makine Öğrenmesi Model Performansı"):
+        st.write("Random Forest Regression - Test Sonuçları")
+
+        col1, col2, col3 = st.columns(3)
+
+        col1.metric("MAE", f"{mae:.2f}")
+        col2.metric("RMSE", f"{rmse:.2f}")
+        col3.metric("R² Score", f"{r2:.4f}")
+
+        st.caption(
+            "Model, %80 eğitim ve %20 test verisiyle değerlendirilmiştir. "
+            "Veri seti sentetiktir; sonuçlar gerçek tarımsal doğruluğu göstermez."
+        )
 
     with st.sidebar:
         st.header("🌍 Canlı Hava Durumu")
