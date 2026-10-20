@@ -21,7 +21,7 @@ A machine learning-based irrigation decision support application developed with 
 - SQLite
 - OpenWeather API
 
-  ## Project Structure
+## Project Structure
 
 - `akilli_sulama.py` - Streamlit application and user interface
 - `model.py` - Random Forest model training and evaluation
