@@ -21,6 +21,14 @@ A machine learning-based irrigation decision support application developed with 
 - SQLite
 - OpenWeather API
 
+  ## Project Structure
+
+- `akilli_sulama.py` - Streamlit application and user interface
+- `model.py` - Random Forest model training and evaluation
+- `veri_olusturucu.py` - Synthetic dataset generation
+- `bitki_verisi.csv` - Dataset used for model training
+- `requirements.txt` - Python dependencies
+
 ## Dataset
 
 The model is trained on a synthetically generated dataset created with Python. Predictions are intended for demonstration and educational purposes, not validated agricultural recommendations.
